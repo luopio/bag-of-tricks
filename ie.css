@@ -1,0 +1,13 @@
+/***********************************************************************************/
+/*   FIX for overflow not being hidden even when it should be (position:relative)  */
+/***********************************************************************************/
+.containerElement {
+    overflow: hidden;
+    width: 100px;
+    position: relative; /* IE fix for overflow:hidden not being hidden */
+}
+.childElement {
+    position:relative;
+    /* ... */
+}
+/***********************************************************************************/

@@ -1,0 +1,56 @@
+/* ========================================================= */
+/* Basic column layouts                                      */
+/* ========================================================= */
+.two-columns, .three-columns, .four-columns, .five-columns {
+    overflow: hidden;
+}
+.row {
+    overflow: hidden;
+}
+.column {
+    display: inline-block;
+    float: left;
+    margin-right: 3.5%;
+    min-height: 1px;
+}
+.two-columns .column {
+    width: 48.25%;
+}
+.three-columns .column {
+    width: 31%;
+}
+.four-columns .column {
+    width: 22.325%;
+}
+.five-columns .column {
+    width: 17.2%;
+}
+.last {
+    margin-right: 0px;
+    /*  One alternative for surviving browser differences in subpixel rounding.
+        The other is negative margins of a few pixels on last */
+    overflow: hidden;
+    width: auto;
+
+}
+.column img, .column object, .column embed {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Uneven divisions ============================= */
+.two-thirds {
+    width: 62%;
+}
+.one-third {
+    width: 31%;
+}
+.four-columns .one-quarter {
+    width: 24.125%;
+}
+.four-columns .two-quarters {
+    width: 48.35%;
+}
+.four-columns .three-quarters {
+    width: 72.375%;
+}
