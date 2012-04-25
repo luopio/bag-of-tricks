@@ -66,3 +66,22 @@ var _gaq = _gaq || [];
     } catch(err) {;}
   }
 //=========================================================//
+
+
+//=========================================================//
+// Get tweets from user
+function getTweetsFromUser(userName, callback) {
+    $.getJSON('http://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&screen_name=' + userName + '&count=10&callback=?')
+        .success(
+        function(data) {
+            console.dir(data);
+            if(callback)
+                callback(data);
+        }
+    )
+        .error(
+        function(data) {
+            alert('failed to retrieve twiits for '+userName);
+        }
+    );
+}
