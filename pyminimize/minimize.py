@@ -77,19 +77,23 @@ def look_for_required_files(files):
     ''' Look for files that are needed by the files in the build and include those '''
     needed_files_by_file = {}
     for f in files:
-        print "look for reqs in file", f
-        needed_files_by_file[f] = [ f for f in scan_for_file_links_in_html(f) ]
+        print "look for reqs in file", f,
+        needed_files_by_file[f] = [ ff for ff in scan_for_file_links_in_html(f) ]
         print "found", len(needed_files_by_file[f])
-
+        for l in needed_files_by_file[f]: print "   ", l
+    
     # look for potential files required by these files
     for from_file, files in needed_files_by_file.items():
-        path = os.path.dirname(from_file)
+        start_from_path = os.path.dirname(from_file)
         for f in files:
-            if not os.path.exists(os.path.join(path, f)):
+            path = start_from_path
+            fpath = os.path.dirname(f)
+            if not os.path.exists(os.path.join(start_from_path, f)):
+                print "not found file", os.path.join(path, f), start_from_path, f, "for", from_file
                 continue
-            suf = f.rsplit('.', 1)[1] 
+            suf = f.rsplit('.', 1)[1]
             if suf in ('less', 'css'):
-                needed_files_by_file[os.path.join(path, f)] = [os.path.join(path, ff) for ff in scan_for_file_links_in_css(os.path.join(path, f))]
+                needed_files_by_file[os.path.join(path, f)] = [os.path.join(path,fpath,ff) for ff in scan_for_file_links_in_css(os.path.join(path, f))]
             elif suf in ('js', 'coffee'):
                 pass # needed_files_by_file[f] = [os.path.join( os.path.dirname(f), ff) for ff in scan_for_file_links_in_js(f)]
 
@@ -117,26 +121,30 @@ def scan_for_file_links_in_js(f):
     return all_files
 
 
-def copy_files_to_build(files_by_file):
+def copy_files_to_build(files_by_file, list_of_files):
     not_founds = []
     copied = 0
+    for f in list_of_files:
+        dn = os.path.dirname(f)
+        if not os.path.exists(os.path.join(BUILD_DIR, dn)):
+            os.makedirs(os.path.join(BUILD_DIR, dn))
+        shutil.copy(f, os.path.join(BUILD_DIR, f))
+
     for from_file, files in files_by_file.items():
-        print "copy", from_file
         included_from_dir = os.path.dirname(from_file)
         for f in files:
-            if f.startswith('http:') or f.startswith('https:'):
+            if f.startswith('http:') or f.startswith('https:') or f.startswith('//'):
                 continue
             if not os.path.exists(f):
                 not_founds.append((f, from_file))
             else:
-                # dirname = os.path.join(BUILD_DIR, os.path.dirname(f))
-                dirname = os.path.dirname(f)
-                # if not os.path.isdir(dirname):
-                #    os.makedirs(dirname)
-                target = os.path.join(included_from_dir, dirname, os.path.basename(f))
-                # print "copy from", f, "to", target
-                # shutil.copy(f, target)
-                print "copy", target
+                dirname_in_build = os.path.join(BUILD_DIR, os.path.dirname(f))
+                if not os.path.isdir(dirname_in_build):
+                   os.makedirs(dirname_in_build)
+                target = os.path.join(dirname_in_build, os.path.basename(f))
+                print "copy from", f, "to", target
+                shutil.copy(f, target)
+                # print "copy", target
                 copied += 1
     if False and not_founds:
         print 
@@ -144,7 +152,8 @@ def copy_files_to_build(files_by_file):
         for f, from_file in not_founds: print "%s (requested in %s)" % (f, from_file)
         print
 
-    print "Copied %s files" % copied
+    print "Copied %s files" % copied, "Failed with %s files" % len(not_founds)
+    for l in not_founds: print "NOT FOUND", l
     return not_founds
 
 
@@ -165,4 +174,11 @@ if __name__=='__main__':
     bootstrap()
     automatically_included_files = look_for_included_files()
     needed_files = look_for_required_files(automatically_included_files)
-    copy_files_to_build(needed_files)
+
+    for f,v in needed_files.items():
+        print f
+        for vv in v: print "    ", vv
+        
+    raise
+
+    copy_files_to_build(needed_files, automatically_included_files)

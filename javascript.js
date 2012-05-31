@@ -20,6 +20,8 @@ $(document).keydown(function(e) {
     // do something with right arrow
   } else if(e.keyCode == 27) {
     // do something with esc
+  } else if(e.keyCode == 13) {
+      // do something with enter
   }
 });
 //=========================================================//
@@ -85,3 +87,45 @@ function getTweetsFromUser(userName, callback) {
         }
     );
 }
+//=========================================================//
+
+
+//=========================================================//
+// Flash detection with swfobject
+if(swfobject.hasFlashPlayerVersion("1")) {
+    alert("You have flash!");
+} else {
+    alert("You do not flash :-(");
+}
+//=========================================================//
+
+
+//=========================================================//
+// Custom validation for jquery.validate
+// this one requires the text "buga", we define a default message, too
+$.validator.addMethod("buga", function(value) {
+    return value == "buga";
+}, 'Please enter "buga"!');
+
+// this one requires the value to be the same as the first parameter
+$.validator.methods.equal = function(value, element, param) {
+    return value == param;
+};
+// usage
+/*
+[..].validate({
+    [...]
+        rules: {
+            number: {
+                required:true,
+                minlength:3,
+                maxlength:15,
+                number:true
+            },
+            secret: "buga",
+            math: {
+                equal: 11
+            }
+        }
+    });
+*/
