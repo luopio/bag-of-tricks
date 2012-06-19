@@ -1,30 +1,18 @@
 /* ========================================================= */
 /* Basic column layouts                                      */
 /* ========================================================= */
-.two-columns, .three-columns, .four-columns, .five-columns {
-    overflow: hidden;
-}
-.row {
-    overflow: hidden;
-}
 .column {
     display: inline-block;
     float: left;
     margin-right: 3.5%;
     min-height: 1px;
 }
-.two-columns .column {
-    width: 48.25%;
-}
-.three-columns .column {
-    width: 31%;
-}
-.four-columns .column {
-    width: 22.325%;
-}
-.five-columns .column {
-    width: 17.2%;
-}
+.two-columns, .three-columns, .four-columns, .five-columns { overflow: hidden; }
+.row { overflow: hidden; }
+.two-columns .column { width: 48.25%; }
+.three-columns .column { width: 31%; }
+.four-columns .column { width: 22.325%; }
+.five-columns .column { width: 17.2%; }
 .last {
     margin-right: 0px;
     /*  One alternative for surviving browser differences in subpixel rounding.
@@ -32,7 +20,6 @@
         NB: this causes issues with content that takes too much space. */
     overflow: hidden;
     width: auto;
-
 }
 
 /*
@@ -44,24 +31,11 @@
 .four-columns .column.last { width: 22.2%; }
 
 
-.column img, .column object, .column embed {
-    max-width: 100%;
-    height: auto;
-}
+.column img, .column object, .column embed { max-width: 100%; height: auto; }
 
 /* Uneven divisions ============================= */
-.two-thirds {
-    width: 62%;
-}
-.one-third {
-    width: 31%;
-}
-.four-columns .one-quarter {
-    width: 24.125%;
-}
-.four-columns .two-quarters {
-    width: 48.35%;
-}
-.four-columns .three-quarters {
-    width: 72.375%;
-}
+.two-thirds { width: 62%; }
+.one-third { width: 31%; }
+.four-columns .one-quarter { width: 24.125%; }
+.four-columns .two-quarters { width: 48.35%; }
+.four-columns .three-quarters { width: 72.375%; }

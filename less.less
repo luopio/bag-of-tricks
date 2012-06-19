@@ -1,10 +1,84 @@
 // ======================================================== //
 // List of helpful less-functions.
 // Original by Joni Korpi <http://jonikorpi.com/>
-// Modified to include some fixes and -o-prefixes
+// Since then, added a bunch of nice elements, some fixes
+// and -o-prefixes, ie-filters
 // ======================================================== //
 
-.hide-text { text-indent: -9999px; font-size: 0px; color: transparent; }
+.hide-text { text-indent: -9999px; font-size: 0px; color: transparent; text-decoration: none; }
+
+.pretty-pink-button(@textColor: #fff, @radius:4px, @startColor: #d37bb2, @middleColor: #c54491, @endColor: #931c6b) {
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	color: @textColor;
+	border: 	#a41a6c solid 1px;
+	/* box shadow */
+	-moz-box-shadow: 		2px 2px 3px 0px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 	2px 2px 3px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 			2px 2px 3px 0px rgba(0, 0, 0, 0.2);
+	/* border radius */
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+	padding: 8px 16px;
+	background: #bb1f7b;
+	/* gradient */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, @startColor), color-stop(0.3, @middleColor), color-stop(1, @endColor));
+	background-image: -webkit-linear-gradient(top center, @startColor, @middleColor, @endColor);
+	background-image: -moz-linear-gradient(top center, @startColor 0%, @middleColor 30%, @endColor 100%);
+	background-image: -o-linear-gradient(top, @startColor, @middleColor 30%, @endColor);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@startColor', endColorstr='@endColor');
+	background-image: linear-gradient(top, bottom, @startColor 0%, @middleColor 30%, @endColor 100%);
+
+	&:hover {
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, @startColor), color-stop(0.23, @middleColor), color-stop(1, @endColor));
+		background-image: -webkit-linear-gradient(top center, @tartColor, @middleColor, @endColor);
+		background-image: -moz-linear-gradient(top center, @startColor 0%, @middleColor 23%, @endColor 100%);
+		background-image: -o-linear-gradient(top, @startColor, @middleColor 23%, @endColor);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@startColor', endColorstr='@endColor');
+		background-image: linear-gradient(top, bottom, @startColor 0%, @middleColor 23%, @endColor 100%);
+	}
+}
+
+
+.pretty-textarea {
+	background: #ffffff;
+	border: 1px solid #aaaaaa;
+	-moz-box-shadow: inset 0 0 4px #aaaaaa;
+	-webkit-box-shadow: inset 0 0 4px #aaaaaa;
+	-o-box-shadow: inset 0 0 4px #aaaaaa;
+	box-shadow: inset 0 0 4px #aaaaaa;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-o-border-radius: 6px;
+	border-radius: 6px;
+
+	font-size: 16px;
+	margin-bottom: 4px;
+	padding: 8px 4px;
+	width: 330px;
+}
+
+.pretty-text-input {
+	background: #ffffff;
+	border: 1px solid #aaaaaa;
+	-moz-box-shadow: inset 0 0 4px #aaaaaa;
+	-webkit-box-shadow: inset 0 0 4px #aaaaaa;
+	-o-box-shadow: inset 0 0 4px #aaaaaa;
+	box-shadow: inset 0 0 4px #aaaaaa;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-o-border-radius: 6px;
+	border-radius: 6px;
+
+	font-size: 16px;
+	height: 34px;
+	padding: 3px;
+	vertical-align: middle;
+	width: 340px;
+}
 
 .transition (@transition) {
     -webkit-transition: @transition;
@@ -16,6 +90,8 @@
 
 
 
+// inset? horizontal offset, vertical offset, optional blur distance and optional spread distance, color
+// e.g. inset 2px 2px 2px 2px black;
 .box-shadow (@string) {
 	-webkit-box-shadow: @string;
 		-moz-box-shadow: @string;
@@ -117,6 +193,10 @@
 	background-image: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
 	background-image: -webkit-linear-gradient(right center, @startColor, @endColor);
 	background-image: -moz-linear-gradient(right center, @startColor, @endColor);
+	background-image: -o-linear-gradient(right center, @startColor, @endColor);
+	// IE
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@startColor', endColorstr='@endColor');
+	background-image: linear-gradient(top, @startColor 0%, @endColor 100%);
 }
 
 .horizontal-three-color-gradient (@firstStop: 0, @startColor: #00b3ee, @midStop: 0.5, @midColor: #7a43b6, @lastStop: 1, @endColor: #c3325f) {
