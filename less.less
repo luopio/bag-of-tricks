@@ -245,3 +245,14 @@
 	background-image: -webkit-linear-gradient(@startColor, color-stop(@colorStop, @midColor), @endColor);
 	background-image: -moz-linear-gradient(@startColor, color-stop(@midColor, @colorStop), @endColor);
 }
+
+// prevents the user from selecting text
+// e.g. none
+.user-select(@s) {
+    -webkit-touch-callout: @s;
+    -webkit-user-select: @s;
+    -khtml-user-select: @s;
+    -moz-user-select: @s;
+    -ms-user-select: @s;
+    user-select: @s;
+}
