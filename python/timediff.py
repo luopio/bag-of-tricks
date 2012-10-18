@@ -3,16 +3,6 @@
 from datetime import datetime
 import re
 
-def calcdiff(time1, time2):
-    try:
-        time1 = datetime.strptime(time1, '%H:%M')
-        time2 = datetime.strptime(time2, '%H:%M')
-    except ValueError:
-        print "Can't calculate, needs to be HH:MM format, e.g. 13:24"
-        return None
-    return time2 - time1
-
-
 def calcall(time_str):
     ''' time_str something like '17:40 - 8:20 - 0:30 - 0:50' '''
     reg = re.compile('([0-9]{1,2}:[0-9]{2})\s?-?\s?')

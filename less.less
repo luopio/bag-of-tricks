@@ -256,3 +256,11 @@
     -ms-user-select: @s;
     user-select: @s;
 }
+
+// opacity. Use values from 0 to 100
+.opacity(@op:100) {
+	filter:alpha(opacity=@op);
+	-moz-opacity:@op/100;
+	-khtml-opacity:@op/100;
+	opacity:@op/100;
+}
