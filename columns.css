@@ -1,7 +1,7 @@
 /* ========================================================= */
 /* Basic column layouts                                      */
 /* ========================================================= */
-.column {
+.column, .two-thirds, .two-quarters, .three-quarters {
     display: inline-block;
     float: left;
     margin-right: 3.5%;
@@ -35,7 +35,5 @@
 
 /* Uneven divisions ============================= */
 .two-thirds { width: 62%; }
-.one-third { width: 31%; }
-.four-columns .one-quarter { width: 24.125%; }
 .four-columns .two-quarters { width: 48.35%; }
 .four-columns .three-quarters { width: 72.375%; }
