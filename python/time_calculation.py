@@ -1,3 +1,4 @@
+#!/usr/bin/python
 ''' Just something quick for time calculations '''
 
 from datetime import datetime

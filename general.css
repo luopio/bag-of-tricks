@@ -4,3 +4,9 @@
 
 /* prevent dotted outlines on focused elements */
 * :focus { outline: 0; }
+
+/* makes lines in rectangles crisp on supporting browsers */
+svg rect {
+    shape-rendering: crispEdges;
+}
+

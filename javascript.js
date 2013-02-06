@@ -105,6 +105,47 @@ if(swfobject.hasFlashPlayerVersion("1")) {
 
 
 //=========================================================//
+// Jquery.Validate plugin example code
+
+    var validator = $('#register').validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 2 },
+            email: { required: true, email: true },
+            firstpass: {
+                required: true,
+                minlength: 2 },
+            pass_confirm: {
+                required: true,
+                minlength: 2,
+                equalTo: '#firstpass[type="password"]' },
+            step_1: { required: true},
+            step_2: { required: true},
+            perms1: { required: true},
+            perms2: { required: false}
+        },
+        // onkeyup: false,
+        messages: {
+            name: {required: "Ole hyvä ja syötä nimesi", minlength: "Nimen pitää olla yli 2 merkkiä."},
+            email: "Sähköposti puuttuu tai on virheellinen",
+            firstpass: {
+                required: "Salasana puuttuu",
+                minlength: "Salasanan täytyy olla yli 2 merkkiä pitkä."
+            },
+            pass_confirm: {
+                required: "Salasana puuttuu",
+                minlength: "Salasanan täytyy olla yli 2 merkkiä pitkä.",
+                equalTo: "Salasanat eivät täsmää!"
+            },
+            perms1: "Käyttöehdot täytyy hyväksyä"
+        },
+        //errorPlacement: function(error, element) {
+        //    element.after( error );
+        //}
+    });
+
+//=========================================================//
 // Custom validation for jquery.validate
 // this one requires the text "buga", we define a default message, too
 $.validator.addMethod("buga", function(value) {
