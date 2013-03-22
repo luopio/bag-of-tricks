@@ -1,0 +1,22 @@
+.range-slider {
+    width: 346px;
+    height: 50px;
+    position: relative;
+    background: url('slider-bg.png') no-repeat left center;
+}
+.range-slider div.value {
+    background: none;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 30px;
+}
+.range-slider div.handle {
+    background: url('slider-ball.png') no-repeat center center;
+    position: absolute;
+    top: 0;
+    left: 158px;
+    width: 28px;
+    height: 50px;
+    z-index: 100;
+}

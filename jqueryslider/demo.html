@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slider demo</title>
+    <link rel="stylesheet" href="jqueryslider.css" />
+</head>
+<body>
+
+    <input type="text" />
+    <input type="text" />
+    <input type="text" />
+    <input type="text" />
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="jqueryslider.js"></script>
+    <script>
+        $(function() {
+            $('input').slider({
+                complete: function(el) {
+                    console.log("complete", el.val());
+                },
+                change:  function(el) {
+                    console.log("change", el.val());
+                }
+            });
+        })
+    </script>
+
+</body>
+</html>
