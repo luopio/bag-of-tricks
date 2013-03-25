@@ -1,28 +1,33 @@
 /*
-KISS solution for a slider
+ KISS solution for a slider
 
-Usage:
-    Put input-elements in code: <input type="text" name="q2" id="q2" value="" />
-    call $('#q2').slider({complete: function($inputElement) {}, change: function($inputElement) {}})
+ Usage:
+ Put input-elements in code: <input type="text" name="q2" id="q2" value="" />
+ call $('#q2').slider({complete: function($inputElement) {}, change: function($inputElement) {}})
 
-    Slider creates a following element structure in DOM:
+ Slider creates a following element structure in DOM:
 
-    <div class="range-slider">
-         <div class="handle"></div>
-         <div class="value"></div>
-    </div>
+ <div class="range-slider">
+ <div class="handle"></div>
+ <div class="value"></div>
+ </div>
 
-    Apply extra CSS as desired. Get the value with $inputElement.val(). Will be from 0 to 100;
-
-
-Callbacks:
-    complete: called when the slider has been released after moving
-    change: called when the slider is dragged
-    both called with the jquery encapsulated input element as the parameter
+ Apply extra CSS as desired. Get the value with $inputElement.val(). Will be from 0 to 100;
 
 
-Author: Lauri Kainulainen / lauri.sokkelo.net
-*/
+ Callbacks:
+ complete: called when the slider has been released after moving
+ change: called when the slider is dragged
+
+ both called with the jquery encapsulated input element as the parameter
+
+ Methods:
+ $('input').slider('set', percentage) - sets the value of the slider to percentage
+
+ Author: Lauri Kainulainen / lauri.sokkelo.net
+
+ License: WTFPL (http://www.wtfpl.net/txt/copying/)
+ */
 (function( $ ){
     $.fn.slider = function(method) {
         var methods = {
@@ -72,6 +77,7 @@ Author: Lauri Kainulainen / lauri.sokkelo.net
                     });
 
                     $(document).on('touchstop mouseup', function(e) {
+                        // FIXME: complete gets called twice when dragging (click & mouseup)
                         if(self.isMoving && settings.complete) {
                             settings.complete(self.el.find('input'));
                         }
