@@ -39,7 +39,7 @@
                         'change': null
                     }, options);
 
-                    // dynamically create the slider element, you'll only need an input in the code
+                    // dynamically create the slider element - you'll only need an input in the code
                     var $el = $(this);
                     this.isMoving = false;
                     var parent = $('<div class="range-slider"><div class="handle"></div><div class="value"></div></div>').insertBefore($el);
@@ -48,14 +48,17 @@
                     this.el = parent;
 
                     var self = this;
-                    this.el.find('.handle').on('touchstart mousedown', function(e) {
+                    this.handle = this.el.find('.handle');
+
+                    this.handle.on('touchstart mousedown', function(e) {
                         e.preventDefault();
                         self.isMoving = true;
                         return false;
                     });
 
                     this.el.on('click', function(e) {
-                        if(!self.isMoving) {
+
+                        if(!self.isMoving && e.target != self.handle[0]) {
                             if(e.changedTouches) {
                                 var t = e.changedTouches[0];
                                 var x = t.pageX; var y = t.pageY;
@@ -77,7 +80,6 @@
                     });
 
                     $(document).on('touchstop mouseup', function(e) {
-                        // FIXME: complete gets called twice when dragging (click & mouseup)
                         if(self.isMoving && settings.complete) {
                             settings.complete(self.el.find('input'));
                         }
