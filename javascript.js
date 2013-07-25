@@ -235,3 +235,18 @@ window.requestAnimFrame = (function(){
 })();
 // place the rAF *before* the render() to assure as close to 
 // 60fps with the setTimeout fallback.
+
+
+//=========================================================//
+// Global error handler for JS errors 
+//=========================================================//
+window.onerror = function(msg, url, line) {
+    // You can view the information in an alert to see things working
+    // like so:
+    alert("Error: " + msg + "\nurl: " + url + "\nline #: " + line);
+
+    var suppressErrorAlert = true;
+    // If you return true, then error alerts (like in older versions of
+    // Internet Explorer) will be suppressed.
+    return suppressErrorAlert;
+};
