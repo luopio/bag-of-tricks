@@ -42,16 +42,17 @@ $(document).ready( function () {
 
 //=========================================================//
 // Extract a GET parameter via JS 
+//=========================================================//
 function getURLParameter(name) {
     return decodeURI(
         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
     );
 }
-//=========================================================//
 
 
 //=========================================================//
 // Track links with GA 
+//=========================================================//
 var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'XXXXX']);
   _gaq.push(['_trackPageview']);
@@ -71,11 +72,10 @@ function trackEvent(category, action, opt_label) {
     try { _gaq.push(['_trackEvent', category, action, opt_label]);} 
     catch(err) {;}
 }
-//=========================================================//
-
 
 //=========================================================//
 // Get tweets from user
+//=========================================================//
 function getTweetsFromUser(userName, callback) {
     $.getJSON('http://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&screen_name=' + userName + '&count=10&callback=?')
         .success(
@@ -91,22 +91,19 @@ function getTweetsFromUser(userName, callback) {
         }
     );
 }
-//=========================================================//
-
 
 //=========================================================//
 // Flash detection with swfobject
+//=========================================================//
 if(swfobject.hasFlashPlayerVersion("1")) {
     alert("You have flash!");
 } else {
     alert("You do not flash :-(");
 }
-//=========================================================//
-
 
 //=========================================================//
 // Jquery.Validate plugin example code
-
+//=========================================================//
     var validator = $('#register').validate({
         rules: {
             name: {
@@ -147,6 +144,7 @@ if(swfobject.hasFlashPlayerVersion("1")) {
 
 //=========================================================//
 // Custom validation for jquery.validate
+//=========================================================//
 // this one requires the text "buga", we define a default message, too
 $.validator.addMethod("buga", function(value) {
     return value == "buga";
