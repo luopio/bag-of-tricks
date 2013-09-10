@@ -250,3 +250,25 @@ window.onerror = function(msg, url, line) {
     // Internet Explorer) will be suppressed.
     return suppressErrorAlert;
 };
+
+//=========================================================//
+// Replace links in HTML content with direct link (WIP)
+//=========================================================//
+html_content.replace(/<a[^(href|>)]*href="([_.a-zA-Z0-9:/]+)"[^>]*>([^<]*)<\/a>/g, "$1");
+
+//=========================================================//
+// Pretty format numbers (123123.2 => 123 123,20)
+//=========================================================//
+function formatNumber(num) {
+    // num = parseInt(num * 100) / 100;
+    num += "";
+    num = num.replace(/\./g, ',').replace(/"/g, '').trim();
+    // rip out worthless decimals
+    if(num.substr(-3) == ",00") { num = num.substr(0, num.length - 3); }
+    if(num.substr(-2) == ",0") { num = num.substr(0, num.length - 2); }
+    if(new RegExp(",[1-9]$").test(num)) { num = num + "0"; } // zpad
+    // create spaces to form groups of three
+    num = num.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1 ")
+    return num;
+}
+
