@@ -6,16 +6,16 @@ Nginx configuration on Host (for two virtual machines)
 ------------------------------------------------------
 
 server {
-    server_name  alpha.mothership.citat.fi;
+    server_name  alpha.mothership.foo.fi;
     location / {
         proxy_pass         http://localhost:8000;
         proxy_set_header   X-Real-IP $remote_addr;
-        proxy_set_header Host $host; # needed to capture subdomain.alpha.mothership.citat.fi on guest
+        proxy_set_header Host $host; # needed to capture subdomain.alpha.mothership.foo.fi on guest
     }
 }
 
 server {
-    server_name  beta.mothership.citat.fi;
+    server_name  beta.mothership.foo.fi;
     location / {
         proxy_pass         http://localhost:9000;
         proxy_set_header   X-Real-IP $remote_addr;
@@ -23,11 +23,11 @@ server {
 }
 
 
-Example from guest capturing valo.alpha.mothership.citat.fi
+Example from guest capturing valo.alpha.mothership.foo.fi
 -----------------------------------------------------------
 
 <VirtualHost *:80>
-  ServerName valo.alpha.mothership.citat.fi
+  ServerName valo.alpha.mothership.foo.fi
   DocumentRoot /srv/valo_olympiakomitea/valo.fi/public
   # RailsEnv production
   <Directory /srv/valo_olympiakomitea/valo.fi/public>

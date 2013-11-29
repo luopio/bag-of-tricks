@@ -1,0 +1,6 @@
+/* ======================================================== */
+/* Facebook related tricks */
+/* ======================================================== */
+
+/* hide the sharing float box. */
+.fb_edge_comment_widget.fb_iframe_widget { display: none !important }
