@@ -1,3 +1,6 @@
+# create a timelapse (filenames need to be sequential)
+ffmpeg -r 30 -i G00*.JPG -s hd480 -vcodec libx264 -vpre hq time-lapse.mp4
+
 # convert to WMV with good quality (q:v 2-5)
 ffmpeg -i in.mov -q:v 2 -vcodec wmv2 -acodec wmav2 -ar 44100 -ab 48000 -y out.wmv
 
