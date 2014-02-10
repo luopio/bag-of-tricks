@@ -1,0 +1,15 @@
+<div class='field'>
+    <%= f.label :tags -%>
+        <% for tag in ::Refinery::Tags::Tag.all %>
+        <%= tag.name -%>
+            <%= check_box_tag "event[tag_ids][]", tag.id, @event.tags.include?(tag) %>
+        <% end %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :categories -%>
+    <%= select_tag "event[category_ids][]", options_for_select(nested_set_options(Refinery::Categories::Category, @category) { |i| "#{'-' * i.level} #{i.name}" }, @event.category.collect { |c| c.id }), {:multiple => true, :size => 15} %>
+  </div>
+
+
+

@@ -1,0 +1,81 @@
+---
+
+  <ul id="images" class="slides" style="list-style: none; overflow: hidden;">
+    <% @product.images.each_with_index do |n, i| %>
+      <li>
+        <%= image_fu n, '135x135#c' %>
+        <%= hidden_field_tag "#{f.object_name.demodulize}[image_ids][]", n.id %>
+        <button class="remove-button" ><%= t 'remove' %></button>
+      </li>
+    <% end %>
+
+    <li id="image-blueprint" style="display: none;">
+      <input id="product_image_ids_" type="hidden" value="" name="product[image_ids][]" />
+      <button class="remove-button" ><%= t 'remove' %></button>
+    </li>
+  </ul>
+
+<style>
+  #images li {
+    float: left;
+    display: block;
+    width: 25%;
+    text-align: center;
+  }
+</style>
+
+---
+
+<% content_for :javascripts do -%>
+  <script>
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+      $(document).on('click', '.remove-button', function() {
+        if($('')) {
+          $(this).closest('li').remove();
+        }
+      });
+
+//      $("#images").sortable({
+//        'tolerance': 'pointer'
+//        , 'placeholder': 'placeholder'
+//        , 'cursor': 'drag'
+//        , 'items': 'li'
+//        , stop: reindex_images
+//      });
+    });
+
+    // reordeing and reindexing is unnecessary right now since there is no
+    // position stored in the relation. Should be possible to get working by
+    // creating a custom relation table with :position and using this for the image hiddens:
+    // needs editing, borrowed from refinery-page-images
+    // hidden_field_tag "#{f.object_name.demodulize}[images_attributes][#{index}][image_page_id]", f.object.image_page_id_for_image_index(index)
+    function reindex_images(foo) {
+      console.log('reindex images', foo)
+      $('#images li input:hidden').each(function(i){
+        var $this = $(this);
+        if(!$this.val()) { return true; } // skip the blueprint li
+        // make the image's name consistent with its position.
+        var parts = $this.attr('name').split(']');
+        parts[1] = ('[' + i);
+        var newName = parts.join(']');
+        console.log('new name', newName);
+        $this.attr('name', newName);
+        // make the image's id consistent with its position.
+        $this.attr('id', $this.attr('id').replace(/_\d_/, '_'+i+'_').replace(/_\d/, '_'+i));
+      });
+    }
+
+    function image_added(foo) {
+      var $clone = $('#image-blueprint').clone();
+      $clone.find('input').val(foo.dataset.id);
+      $("<img />").attr({
+        title: $(foo).attr('title')
+        , alt: $(foo).attr('alt')
+        , src: $(foo).attr('data-grid') // use 'grid' size that is built into Refinery CMS (135x135#c).
+      }).prependTo($clone);
+
+      $clone.appendTo($('#images')).show();
+    }
+  </script>
+<% end -%>
