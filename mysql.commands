@@ -1,0 +1,5 @@
+CREATE USER 'fooo'@'localhost' IDENTIFIED BY 'dddd';
+CREATE DATABASE staging;
+GRANT ALL PRIVILEGES ON staging.* TO 'fooo'@'localhost';
+
+
