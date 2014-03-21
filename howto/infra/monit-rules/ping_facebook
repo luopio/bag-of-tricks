@@ -1,0 +1,5 @@
+# check for a basic ping 
+check host facebook.com with address facebook.com
+    if failed icmp type echo with timeout 15 seconds then alert
+    if failed icmp type echo with timeout 15 seconds then exec "/home/pi/check_network_works.sh" 
+

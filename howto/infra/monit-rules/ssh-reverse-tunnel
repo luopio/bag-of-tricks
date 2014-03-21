@@ -1,0 +1,5 @@
+# check that reverse ssh tunnel is up
+check process ssh-reverse-tunnel.sh with pidfile /home/pi/ssh-reverse-tunnel.pid
+      start = "/home/pi/ssh-reverse-tunnel-init.sh start"
+      stop = "/home/pi/ssh-reverse-tunnel-init.sh stop"
+      if cpu > 90% for 2 cycles then restart

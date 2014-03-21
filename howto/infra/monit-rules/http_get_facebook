@@ -1,0 +1,4 @@
+# check facebook with an actual get request
+check host facebook.com with address facebook.com
+    if failed port 80 protocol http and request "/"
+    then alert with the mail-format {subject: Facebook is down!}

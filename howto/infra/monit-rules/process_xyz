@@ -1,0 +1,5 @@
+# the canonical process watching example, see startup-script example
+# in the parent directory as well
+check process xyz with pidfile /var/run/xyz.pid
+      start = "/bin/xyz start"
+      stop = "/bin/xyz stop"

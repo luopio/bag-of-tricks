@@ -1,0 +1,5 @@
+# check that pulse monitor is alive and well
+check process pulse-monitor-update.sh with pidfile /var/run/pulse-monitor.pid
+      start = "/home/pi/pulse-monitor-init.sh start"
+      stop = "/home/pi/pulse-monitor-init.sh stop"
+      if cpu > 90% for 2 cycles then restart
