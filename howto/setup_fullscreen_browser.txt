@@ -1,0 +1,27 @@
+original: http://stackoverflow.com/questions/11251948/trying-to-make-a-webkit-kiosk-on-debian-with-raspberry-pi	
+
+If you want to automatically load a browser full screen in kiosk mode every time you turn on the rpi you can add one of these two lines to the file /etc/xdg/lxsession/LXDE/autostart
+
+@chromium --kiosk --incognito www.google.it
+@midori -i 120 -e Fullscreen -a www.google.it -p
+
+The first is for chromium and the latter is for midori, the rpi default lightweight browser.
+
+Hint : Since we will use the rpi as a kiosk we want to prevent the screen from going black and disable the screensaver. Edit the autostart file:
+
+sudo pico /etc/xdg/lxsession/LXDE/autostart
+
+find the following line and comment it using a # (it should be located at the bottom)
+
+#@xscreensaver -no-splash
+
+and append the following lines
+
+@xset s off 
+@xset -dpms 
+@xset s noblank 
+
+Save, reboot.
+
+More info on http://pikiosk.tumblr.com/post/38721623944/setup-raspberry-ssh-overclock-sta
+

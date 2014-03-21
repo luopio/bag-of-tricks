@@ -1,0 +1,25 @@
+# QUICK HOWTO ON WIFI INTERNET CONNECTION
+#########################################
+
+Tested on Raspbian 12.3.2012 - using WifiN dongle:
+
+$ lsusb
+[...]
+Bus 001 Device 010: ID 148f:5370 Ralink Technology, Corp. RT5370 Wireless Adapter
+[...]
+
+
+Edit /etc/network/interfaces and write config for wlan0.
+Here's the end of the file starting from the - here commented - lines
+
+
+# allow-hotplug wlan0
+# iface wlan0 inet manual
+# wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet dhcp
+  wpa-ssid "WLAN2011"
+  wpa-psk "citatwlan1"
+
+iface default inet dhcp

@@ -1,0 +1,11 @@
+1# 
+display_rotate=1 in /boot/config.txt
+
+2#
+rotate touch input
+$ DISPLAY=:0 xinput set-prop 7 242 1
+$ DISPLAY=:0 xinput set-prop 7 240 0, 1
+
+might change the id number. device name is multitouch
+$ DISPLAY=:0 xinput set-prop 9 241 1
+$ DISPLAY=:0 xinput set-prop 9 239 0, 1

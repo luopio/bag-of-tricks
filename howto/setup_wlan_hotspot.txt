@@ -1,0 +1,77 @@
+How to setup WLAN hotspot
+=========================
+
+$ sudo apt-get install hostapd udhcpd
+
+$ sudo apt-get install dnsmasq # for directing all clients to a certain address 
+(source for this: http://sirlagz.net/2012/08/09/how-to-use-the-raspberry-pi-as-a-wireless-access-pointrouter-part-1/)
+
+Configure DNSMASQ 
+-----------------
+Replace /etc/dnsmasq.conf with this:
+
+# ------------- 8< ------------------
+# To get dnsmasq to listen only on wlan0.
+interface=wlan0
+
+# This sets the available range from 10.0.0.2 to 10.0.0.5
+# It also sets the subnet mask to 255.255.255.0 and 
+# specifies a lease time of 12 hours.
+dhcp-range=10.0.0.2,10.0.0.5,255.255.255.0,12h 
+# ------------- 8< ------------------
+
+Configure Wlan0 Network interface
+---------------------------------
+Give the interface a static IP so it can assign more of them.
+Edit /etc/network/interfaces and replace wlan0 section with:
+# --------------- 8< -------------------
+iface wlan0 inet static
+address 10.0.0.1
+netmask 255.255.255.0
+# --------------- 8< -------------------
+
+Configure DHCP
+--------------
+Replace /etc/udhcpd.conf with this:
+
+# --------- 8< -------------------------
+# This is the range of IPs that the hostspot will give to client devices.
+start 192.168.42.1
+end 192.168.42.100
+
+# The device uDHCP listens on.
+interface wlan0 
+remaining yes
+
+opt dns 8.8.8.8 4.2.2.2 # The DNS servers client devices will use.
+opt subnet 255.255.255.0
+opt router 192.168.42.1 # The Pi's IP address on wlan0 which we will set up shortly.
+opt lease 864000 # 10 day DHCP lease time in seconds
+# --------- 8< -------------------------
+
+Edit file /etc/default/udhcpd and create a comment:
+#DHCPD_ENABLED="no"
+
+If you need internet routed from the location forward, see http://elinux.org/RPI-Wireless-Hotspot
+
+Configure HostAPD
+-----------------
+Open network. For closed, see the above link.
+
+Edit (and possibly create) /etc/hostapd/hostapd.conf with:
+# -------------- 8< ----------------
+interface=wlan0
+ssid=My_AP
+hw_mode=g
+channel=6
+auth_algs=1
+wmm_enabled=0
+# -------------- 8< ----------------
+
+Edit the file /etc/default/hostapd and enable line with DAEMON_CONF:
+DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+Start services with
+$ /etc/init.d/hostapd start
+$ /etc/init.d/udhcpd start
+

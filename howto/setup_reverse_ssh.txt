@@ -1,0 +1,30 @@
+Reverse SSH
+===========
+
+Reverse SSH forms a tunnel between the device and a public server.
+The beauty is that the tunnel is formed from the device, thus
+making it possible to get around NAT, firewalls and other nasties.
+
+Here's the command to be run on the device:
+  $ ssh -nNT -R 2201:localhost:22 lauri@dev.citat.fi
+
+This forms a tunnel from dev.citat.fi port 2201 to localhost port 22.
+
+Now logging to dev.citat.fi as lauri and issuing
+  $ ssh -p 2201 pi@localhost
+Will connect you to the device itself.
+
+It's best to use another user account for the tunnel (not lauri). So
+that you can get rid of it quickly if needed.
+
+It's also good to keep a list of what tunnels you have in the ssh config
+of that user. So in ~/.ssh/config have an entry per tunnel:
+
+host my_pi
+    User pi
+    Hostname localhost
+    Port 2201
+
+Then you can ssh to the public server and run 
+  $ ssh my_pi
+to connect.

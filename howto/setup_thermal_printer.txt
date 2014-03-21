@@ -1,0 +1,9 @@
+wajig install python-serial python-imaging-tk
+
+sudo usermod -a -G dialout pi
+
+/boot/cmdline.txt =>
+get rid of value pairs containing ttyAMA0
+
+/etc/inittab =>
+comment out last line that opens a tty
