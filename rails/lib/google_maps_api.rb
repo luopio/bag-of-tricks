@@ -9,7 +9,7 @@ class GoogleMapsAPI
 
   def self.geocode(number, street, city, country)
     param = ["#{street} #{number}", city, country].join ', '
-    url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{CGI::escape param}&sensor=false&language=#{@language}"
+    url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{CGI::escape param}&sensor=false&language=#{@language}&key=#{@key}"
     puts "GEOCODE>>#{url}"
     open(url) do |res|
       JSON::parse(res.read)

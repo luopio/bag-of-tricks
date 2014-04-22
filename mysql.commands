@@ -2,4 +2,11 @@ CREATE USER 'fooo'@'localhost' IDENTIFIED BY 'dddd';
 CREATE DATABASE staging;
 GRANT ALL PRIVILEGES ON staging.* TO 'fooo'@'localhost';
 
+# changing to utf8 later on
+SHOW FULL COLUMNS FROM refinery_page_translations;
+ALTER TABLE refinery_product_translations CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+show variables like "collation_database";
+ALTER DATABASE kekkila_russia_staging DEFAULT CHARACTER SET utf8 COLLATE=utf8_general_ci;
 
+# Copying a database
+mysqldump -h localhost -u root -pXXXX kekkila_finland_staging | mysql -h localhost -u root -pXXXX kekkila_finland_production
