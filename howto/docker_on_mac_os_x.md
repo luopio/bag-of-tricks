@@ -29,3 +29,10 @@ docker pull busybox
 docker run busybox /bin/echo hello maailma
 docker run busybox /bin/uname -a
 
+== Port forward
+
+Run your docker with docker run -p 80 and check which >49000 port gets mapped to 80 on container,
+or do -p 80:80 and run stuff below for VM redirect
+
+Access port 80 on container from 49000
+boot2docker ssh -L 49000:localhost:80

@@ -1,5 +1,7 @@
 # create a timelapse (filenames need to be sequential)
 ffmpeg -r 30 -i G00*.JPG -s hd480 -vcodec libx264 -vpre hq time-lapse.mp4
+# A more mac compatible version. First use sequential_rename
+ffmpeg -f image2 -i %05d.JPG -s hd480 -r 30 -vcodec h264 time-lapse-2.mp4
 
 # convert to WMV with good quality (q:v 2-5)
 ffmpeg -i in.mov -q:v 2 -vcodec wmv2 -acodec wmav2 -ar 44100 -ab 48000 -y out.wmv
