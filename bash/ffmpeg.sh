@@ -1,3 +1,7 @@
+# Your distribution might be shipping libav-tools instead. If so you can try
+# replacing ffmpeg with avconv
+# timelapse for ubuntu 14.04, needs sequential rename first..
+avconv -f image2 -r 30 -i "%05d.jpg" -vcodec libx264 time-lapse.mp4
 # create a timelapse (filenames need to be sequential)
 ffmpeg -r 30 -i G00*.JPG -s hd480 -vcodec libx264 -vpre hq time-lapse.mp4
 # A more mac compatible version. First use sequential_rename
