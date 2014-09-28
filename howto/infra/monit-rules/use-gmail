@@ -1,1 +1,5 @@
-# set mailserver smtp.gmail.com port 587 username "user@domain.com" password "password" using tlsv1 with timeout 30 seconds
+set mailserver smtp.gmail.com 
+    port 587 
+    username "user@domain.com" 
+    password "password" 
+    using tlsv1 with timeout 30 seconds

@@ -1,0 +1,6 @@
+check process nginx
+  with pidfile /opt/nginx/logs/nginx.pid
+  start program = "/sbin/start nginx"
+  stop program = "/sbin/stop nginx"
+  if failed host 127.0.0.1 port 80 then restart
+  if 5 restarts within 5 cycles then timeout
