@@ -47,12 +47,12 @@ def extract_seconds(buf):
         return 0
 
 
-print 'Time calculation in the form "<TIME> [+|-] <TIME>", where <TIME> can be format HH:MM, HHMM, HMM, MM.'
-while True:
-    t1 = raw_input('(q to quit)" > ')
-    if t1 == 'q':
-        break
-    delta = calculate(t1)
-    print "Result = %s:%s" % (delta / 60 / 60, delta / 60 % 60)
-
-print "Bye. Have a nice day."
+if __name__ == '__main__':
+    print 'Time calculation in the form "<TIME> [+|-] <TIME>", where <TIME> can be format HH:MM, HHMM, HMM, MM.'
+    while True:
+        t1 = raw_input('(q to quit)" > ')
+        if t1 == 'q':
+            break
+        delta = calculate(t1)
+        print "Result = %s:%s" % (delta / 60 / 60, delta / 60 % 60)
+    print "Bye. Have a nice day."
