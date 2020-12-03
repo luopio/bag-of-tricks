@@ -29,3 +29,23 @@ const smoothScrollTo = (to, duration) => {
   }, 10);
 };
 
+//////////////////////////////////////////////////////
+// More working example from a React context        //
+//////////////////////////////////////////////////////
+const smoothScrollTo = (scrollingElement, to, duration) => {
+  if (duration <= 0) return;
+  const difference = to - scrollingElement.scrollTop;
+  const perTick = (difference / duration) * 10;
+
+  setTimeout(() => {
+    // eslint-disable-next-line no-param-reassign
+    scrollingElement.scrollTop += perTick;
+    if (scrollingElement.scrollTop === to) return;
+    smoothScrollTo(scrollingElement, to, duration - 10);
+  }, 10);
+};
+
+const scrollToTop = () => {
+  const scrollingElement = document.querySelector('.modal');
+  smoothScrollTo(scrollingElement, 0, 500);
+};
